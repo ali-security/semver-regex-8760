@@ -26,3 +26,24 @@ it('should match semver versions', function () {
 	assert(!semverRegex().test('1.08.0'));
 	assert(!semverRegex().test('01.8.0'));
 });
+
+it('should not hang on SNYK-JS-SEMVERREGEX-1047770', function () {
+	var start = Date.now();
+	semverRegex().test('v1.1.3-0aa.aa.aa.aa.aa.aa.aa.aa.aa.aa.aa.aa.aa.aa.aa.aa.aa.aa.aa.aa.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa$');
+	var difference = Date.now() - start;
+	assert(difference < 1000, "Execution time: " + difference);
+});
+
+it('should not hang on CVE-2021-3795', function () {
+	var start = Date.now();
+	semverRegex().test('0.0.0-0.-------.-------.-------.-------.-------.-------.-------.-------.-------@');
+	var difference = Date.now() - start;
+	assert(difference < 1000, "Execution time: " + difference);
+});
+
+it('should not hang on CVE-2021-43307', function () {
+	var start = Date.now();
+	semverRegex().test('0.0.1--.---.---.---.---.---.---.---.---.---.-- ');
+	var difference = Date.now() - start;
+	assert(difference < 1000, "Execution time: " + difference);
+});

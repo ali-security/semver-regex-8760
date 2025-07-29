@@ -1,6 +1,6 @@
 {
   "name": "semver-regex",
-  "version": "1.0.0",
+  "version": "1.0.0-sp1",
   "description": "Regular expression for matching semver versions",
   "license": "MIT",
   "repository": "sindresorhus/semver-regex",
